@@ -1,14 +1,29 @@
 import string
-import random
 
-def temperatura():
-    return random.randrange(2, 32)
+valorTemp = 30
+aquecedorLigado = False
 
-#def umidade():
-#    return random.randrange(10, 100)
+# função de ler a temperatura
+def temperatura(ligaAquecedor: bool):
+    global valorTemp
+    global aquecedorLigado
+    
+    if (valorTemp < 25) and (ligaAquecedor):
+        aquecedor(True)
+    if valorTemp > 30:
+        aquecedor(False)
+    if aquecedorLigado:   
+        valorTemp += 1
+    else:
+        valorTemp -= 1
+    return [valorTemp, aquecedorLigado] #recebe o valor da temperatura e se o aquecedor está ligado
 
-def aquecedor(estado: str):
-    if estado == 'on':
+# função de ligar o aquecedor        
+def aquecedor(ligado: bool):
+    global aquecedorLigado
+    if ligado:
+        aquecedorLigado = True
         print('Aquecedor LIGADO')
     else:
+        aquecedorLigado = False
         print('Aquecedor DESLIGADO')
